@@ -30,7 +30,7 @@ class CustomNamespaceSubscriber implements EventSubscriberInterface
 
     public function addCustomNamespace(TemplateEvent $event)
     {
-        foreach (iterator_to_array($event->getTemplate(, false)->getDocument()->childNodes) as $child) {
+        foreach (iterator_to_array($event->getTemplate()->getDocument()->childNodes, false) as $child) {
             if ($child instanceof \DOMElement) {
                 DOMHelper::checkNamespaces($child, $this->customNamespaces);
             }
