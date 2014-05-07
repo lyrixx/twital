@@ -26,7 +26,7 @@ class ExtendsNode implements Node
         }
 
         // remove any non-element node
-        foreach (iterator_to_array($node->childNodes) as $child){
+        foreach (iterator_to_array($node->childNodes, false) as $child){
             if(!($child instanceof \DOMElement)){
                 $child->parentNode->removeChild($child);
             }
@@ -36,7 +36,7 @@ class ExtendsNode implements Node
 
         $ext = $context->createControlNode("extends {$filename}");
 
-        $set = iterator_to_array($node->childNodes);
+        $set = iterator_to_array($node->childNodes, false);
         if(count($set)){
             $n = $node->ownerDocument->createTextNode("\n");
             array_unshift($set, $n);

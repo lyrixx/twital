@@ -51,14 +51,14 @@ class DOMHelper
             $element = self::copyElementInNs($oldElement, $namespaces[$mch[1]]);
         }
         // fix attrs
-        foreach (iterator_to_array($element->attributes) as $attr) {
+        foreach (iterator_to_array($element->attributes, false) as $attr) {
             if ($attr->namespaceURI === null && preg_match('/^([a-z0-9\-]+):/i', $attr->name, $mch) && isset($namespaces[$mch[1]])) {
 
                 $element->removeAttributeNode($attr);
                 $element->setAttributeNS($namespaces[$mch[1]], $attr->name, $attr->value);
             }
         }
-        foreach (iterator_to_array($element->childNodes) as $child) {
+        foreach (iterator_to_array($element->childNodes, false) as $child) {
             if ($child instanceof \DOMElement) {
                 self::checkNamespaces($child, $namespaces);
             }
@@ -70,7 +70,7 @@ class DOMHelper
         $element = $oldElement->ownerDocument->createElementNS($newNamespace, $oldElement->nodeName);
 
         // copy attrs
-        foreach (iterator_to_array($oldElement->attributes) as $attr) {
+        foreach (iterator_to_array($oldElement->attributes, false) as $attr) {
             $oldElement->removeAttributeNode($attr);
             if ($attr->namespaceURI) {
                 $element->setAttributeNodeNS($attr);

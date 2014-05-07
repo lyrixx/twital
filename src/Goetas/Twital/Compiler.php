@@ -113,7 +113,7 @@ class Compiler
     {
         $attributes = $this->twital->getAttributes();
         $continueNode = true;
-        foreach (iterator_to_array($node->attributes) as $attr) {
+        foreach (iterator_to_array($node->attributes, false) as $attr) {
             if (! $attr->ownerElement) {
                 continue;
             } elseif (isset($attributes[$attr->namespaceURI][$attr->localName])) {
@@ -140,7 +140,7 @@ class Compiler
 
     public function compileChilds(\DOMNode $node)
     {
-        foreach (iterator_to_array($node->childNodes) as $child) {
+        foreach (iterator_to_array($node->childNodes, false) as $child) {
             if ($child instanceof \DOMElement) {
                 $this->compileElement($child);
             }

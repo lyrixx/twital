@@ -26,7 +26,7 @@ class EmbedNode implements Node
         }
 
         // remove any non-element node
-        foreach (iterator_to_array($node->childNodes) as $child) {
+        foreach (iterator_to_array($node->childNodes, false) as $child) {
             if (! ($child instanceof \DOMElement)) {
                 $child->parentNode->removeChild($child);
             }
@@ -48,7 +48,7 @@ class EmbedNode implements Node
 
         $ext = $context->createControlNode($code);
 
-        $set = iterator_to_array($node->childNodes);
+        $set = iterator_to_array($node->childNodes, false);
 
         $n = $node->ownerDocument->createTextNode("\n");
         array_unshift($set, $n);

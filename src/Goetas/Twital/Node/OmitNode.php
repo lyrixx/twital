@@ -16,6 +16,6 @@ class OmitNode implements Node
     {
         $context->compileAttributes($node);
         $context->compileChilds($node);
-        DOMHelper::replaceWithSet($node, iterator_to_array($node->childNodes));
+        DOMHelper::replaceWithSet($node, iterator_to_array($node->childNodes, false));
     }
 }

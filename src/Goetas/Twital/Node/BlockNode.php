@@ -37,7 +37,7 @@ class BlockNode implements Node
         $sandbox->insertBefore($start, $sandbox->firstChild);
         $sandbox->appendChild($end);
 
-        DOMHelper::replaceWithSet($sandbox, iterator_to_array($sandbox->childNodes));
-        DOMHelper::replaceWithSet($node, iterator_to_array($node->childNodes));
+        DOMHelper::replaceWithSet($sandbox, iterator_to_array($sandbox->childNodes, false));
+        DOMHelper::replaceWithSet($node, iterator_to_array($node->childNodes, false));
     }
 }

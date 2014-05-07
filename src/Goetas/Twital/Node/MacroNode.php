@@ -22,7 +22,7 @@ class MacroNode implements Node
 
         $context->compileChilds($node);
 
-        $set = iterator_to_array($node->childNodes);
+        $set = iterator_to_array($node->childNodes, false);
 
         $start = $context->createControlNode("macro " . $node->getAttribute("name") . "(" . $node->getAttribute("args") . ")");
         array_unshift($set, $start);

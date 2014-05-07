@@ -40,7 +40,7 @@ class OmitAttribute implements Attribute
         $node->removeAttributeNode($att);
 
         if ($att->value == "true" || $att->value == "1") {
-            foreach (iterator_to_array($node->attributes) as $att) {
+            foreach (iterator_to_array($node->attributes, false) as $att) {
                 $node->removeAttributeNode($att);
             }
         }

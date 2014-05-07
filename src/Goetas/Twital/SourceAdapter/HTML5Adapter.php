@@ -29,7 +29,7 @@ class HTML5Adapter implements SourceAdapter
 
     private static function fixElements(\DOMNode $node, $namespaces = array())
     {
-        foreach (iterator_to_array($node->childNodes) as $child) {
+        foreach (iterator_to_array($node->childNodes, false) as $child) {
             if ($child instanceof \DOMElement) {
                 self::fixNss($child, $namespaces);
             }
@@ -48,7 +48,7 @@ class HTML5Adapter implements SourceAdapter
             $element = DOMHelper::copyElementInNs($oldElement, $namespaces[$mch[1]]);
         }
         // fix attrs
-        foreach (iterator_to_array($element->attributes) as $attr) {
+        foreach (iterator_to_array($element->attributes, false) as $attr) {
             if (preg_match('/^([a-z0-9\-]+):(.+)/', $attr->name, $mch) && isset($namespaces[$mch[1]])) {
                 $element->removeAttributeNode($attr);
                 $element->setAttributeNS($namespaces[$mch[1]], $attr->name, $attr->value);
